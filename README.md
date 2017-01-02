@@ -1,6 +1,8 @@
 ratpack-sse-example
 ===
 
+Example of using [Server-Sent](https://en.wikipedia.org/wiki/Server-sent_events) Events with [Ratpack](https://ratpack.io/).
+
 ##Running the Example
 The example can be run using the following Gradle command:
 
