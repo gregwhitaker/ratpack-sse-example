@@ -5,10 +5,9 @@ import com.github.gregwhitaker.ratpacksse.example.service.MetricsService;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.reactivestreams.Publisher;
-import ratpack.func.Action;
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
-import ratpack.sse.Event;
+import ratpack.jackson.Jackson;
 import ratpack.sse.ServerSentEvents;
 import rx.RxReactiveStreams;
 
@@ -27,12 +26,9 @@ public class MetricsHandler implements Handler {
         Publisher<Metrics> metricsStream = RxReactiveStreams
                 .toPublisher(metricsService.metrics());
 
-        ServerSentEvents events = ServerSentEvents.serverSentEvents(metricsStream, new Action<Event<Metrics>>() {
-            @Override
-            public void execute(Event<Metrics> metricsEvent) throws Exception {
-                metricsEvent.id(Long.toString(System.currentTimeMillis()));
-                System.out.println(metricsEvent.getData());
-            }
+        ServerSentEvents events = ServerSentEvents.serverSentEvents(metricsStream, metricsEvent -> {
+            metricsEvent.id(Long.toString(System.currentTimeMillis()));
+            metricsEvent.data(metrics -> Jackson.getObjectWriter(ctx).writeValueAsString(metrics));
         });
 
         ctx.render(events);

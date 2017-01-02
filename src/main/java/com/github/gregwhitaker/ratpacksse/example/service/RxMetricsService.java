@@ -30,8 +30,7 @@ public class RxMetricsService implements MetricsService {
                     memoryMetrics.setTotalPhysicalMemory(osBean.getTotalPhysicalMemorySize());
                     memoryMetrics.setFreePhysicalMemory(osBean.getFreePhysicalMemorySize());
 
-                    Metrics metrics = new Metrics(cpuMetrics, memoryMetrics);
-                    return metrics;
+                    return new Metrics(cpuMetrics, memoryMetrics);
                 });
     }
 }
