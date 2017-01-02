@@ -17,7 +17,7 @@ public class Main {
                 .serverConfig(c -> c.baseDir(BaseDir.find()))
                 .registry(Guice.registry(b -> b.module(MetricsModule.class)))
                 .handlers(chain -> chain
-                        .get("/metrics", MetricsHandler.class)
+                        .get("metrics", MetricsHandler.class)
                         .files(f -> f
                                 .dir("public").indexFiles("index.html"))));
     }

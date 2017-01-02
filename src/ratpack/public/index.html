@@ -1,19 +1,32 @@
+<!DOCTYPE html>
 <html>
-
 <head>
-    <title>Server-Sent Events Example</title>
-    <script language="javascript" type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <title>SSE Demo</title>
+
+    <script>
+        if(typeof(EventSource) !== "undefined") {
+            var source = new EventSource("metrics");
+            source.onmessage = function(event) {
+                console.log("success", event.data);
+                document.getElementById("result").innerHTML = event.data + "<br>";
+            };
+            source.addEventListener('error', function(e) {
+                console.log("error: ", e);
+                if (e.readyState == EventSource.CLOSED) {
+                    console.log("error: Connection was closed.");
+                }
+            }, false);
+        } else {
+            document.getElementById("result").innerHTML = "Sorry, your browser does not support server-sent events...";
+        }
+    </script>
+
 </head>
 
 <body>
-
-<h2>Server-Sent Events Example</h2>
-<br />
-<button id="connect">Connect</button>
-<button id="disconnect">Disconnect</button>
-<br />
-<br />Output:
-<br /> <pre><div id="output"></div></pre>
+<h1>Events:</h1>
+<div id="result"></div>
+</body>
 
 </body>
 </html>
