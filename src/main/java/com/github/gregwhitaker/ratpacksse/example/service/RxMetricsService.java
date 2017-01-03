@@ -24,11 +24,11 @@ public class RxMetricsService implements MetricsService {
         return Observable.interval(1, TimeUnit.SECONDS)
                 .map(aLong -> {
                     CpuMetrics cpuMetrics = new CpuMetrics();
-                    cpuMetrics.setSystemCpuPercentage(osBean.getSystemCpuLoad());
+                    cpuMetrics.setSystemCpuPercentage(Math.round(osBean.getSystemCpuLoad() * 100.0) / 100.0);
 
                     MemoryMetrics memoryMetrics = new MemoryMetrics();
-                    memoryMetrics.setTotalPhysicalMemory(osBean.getTotalPhysicalMemorySize());
-                    memoryMetrics.setFreePhysicalMemory(osBean.getFreePhysicalMemorySize());
+                    memoryMetrics.setTotalPhysicalMemory(osBean.getTotalPhysicalMemorySize() / 1024 / 1024);
+                    memoryMetrics.setFreePhysicalMemory(osBean.getFreePhysicalMemorySize() / 1024 / 1024);
 
                     return new Metrics(cpuMetrics, memoryMetrics);
                 });

@@ -8,7 +8,12 @@
             var source = new EventSource("metrics");
             source.onmessage = function(event) {
                 console.log("success", event.data);
-                document.getElementById("result").innerHTML = event.data + "<br>";
+
+                var metrics = JSON.parse(event.data);
+
+                document.getElementById("cpuUsage").innerHTML = metrics.cpuMetrics.systemCpuPercentage;
+                document.getElementById("freeMemory").innerHTML = metrics.memoryMetrics.freePhysicalMemory;
+                document.getElementById("totalMemory").innerHTML = metrics.memoryMetrics.totalPhysicalMemory
             };
             source.addEventListener('error', function(e) {
                 console.log("error: ", e);
@@ -24,8 +29,17 @@
 </head>
 
 <body>
-<h1>Events:</h1>
-<div id="result"></div>
+<h1>Metrics</h1>
+<p>The metrics are being streamed back to the browser as a json document using Server-Sent Events.</p>
+<br />
+CPU Usage (%):
+<div id="cpuUsage"></div>
+<br />
+Total Memory (MB):
+<div id="totalMemory"></div>
+<br />
+Free Memory (MB):
+<div id="freeMemory"></div>
 </body>
 
 </body>
