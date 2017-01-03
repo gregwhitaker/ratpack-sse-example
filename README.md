@@ -3,6 +3,8 @@ ratpack-sse-example
 
 Example of using [Server-Sent](https://en.wikipedia.org/wiki/Server-sent_events) Events with [Ratpack](https://ratpack.io/).
 
+This example starts a Ratpack application that sends system metrics (cpu and memory usage) to subscribed Server-Sent Event clients at a 1 second interval.
+
 ##Running the Example
 The example can be run using the following Gradle command:
 
