@@ -1,5 +1,6 @@
 ratpack-sse-example
 ===
+[![Build Status](https://travis-ci.org/gregwhitaker/ratpack-sse-example.svg?branch=master)](https://travis-ci.org/gregwhitaker/ratpack-sse-example)
 
 Example of using [Server-Sent](https://en.wikipedia.org/wiki/Server-sent_events) Events with [Ratpack](https://ratpack.io/).
 
