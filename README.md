@@ -1,7 +1,7 @@
 # ratpack-sse-example
 [![Build Status](https://travis-ci.org/gregwhitaker/ratpack-sse-example.svg?branch=master)](https://travis-ci.org/gregwhitaker/ratpack-sse-example)
 
-Example of using [Server-Sent](https://en.wikipedia.org/wiki/Server-sent_events) Events with [Ratpack](https://ratpack.io/).
+Example of using [Server-Sent Events](https://en.wikipedia.org/wiki/Server-sent_events) with [Ratpack](https://ratpack.io/).
 
 This example starts a Ratpack application that sends system metrics (cpu and memory usage) to subscribed Server-Sent Event clients at a 1 second interval.
 
